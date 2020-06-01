@@ -3,7 +3,7 @@ import { Flex, Box } from '@chakra-ui/core';
 import { Header } from '../../header';
 import { Footer } from '../../footer';
 
-export const Layout = ({ children }) => {
+export const HFLayout = ({ children }) => {
   return (
     <Flex
       direction="column"
