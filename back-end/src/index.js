@@ -1,13 +1,23 @@
+// Thirdparty Modules
 const express = require('express');
+const morgan = require('morgan');
 const path = require('path');
 
-const app = new express();
+const setConfig = require('../config');
 
+// API Routers
+const { AuthRouter } = require('./api');
+
+const app = new express();
+setConfig(app);
+
+// Middlewares
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../../front-end/build')));
 
-app.use('/api/auth', (req, res) => {
-  res.send('API : auth');
-})
+app.use('/api/auth', AuthRouter);
 app.use('/api/download', (req, res) => {
   res.send('API : donwload');
 })
